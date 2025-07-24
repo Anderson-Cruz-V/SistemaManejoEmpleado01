@@ -10,7 +10,6 @@ namespace SistemaManejoEmpleados.Controllers
         private readonly ApplicationDbContext _context;
         public EmpleadosController(ApplicationDbContext context) => _context = context;
 
-        // GET: Empleados/Lista
         public async Task<IActionResult> Lista()
         {
             var empleados = await _context.Empleados
@@ -20,7 +19,6 @@ namespace SistemaManejoEmpleados.Controllers
             return View(empleados);
         }
 
-        // GET: Empleados/Agregar
         public IActionResult Agregar()
         {
             ViewData["Departamentos"] = _context.Departamentos.ToList();
@@ -28,7 +26,6 @@ namespace SistemaManejoEmpleados.Controllers
             return View();
         }
 
-        // POST: Empleados/Agregar
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Agregar(Empleado empleado)
         {
@@ -43,7 +40,6 @@ namespace SistemaManejoEmpleados.Controllers
             return View(empleado);
         }
 
-        // GET: Empleados/Editar/5
         public async Task<IActionResult> Editar(int id)
         {
             var empleado = await _context.Empleados.FindAsync(id);
@@ -54,7 +50,6 @@ namespace SistemaManejoEmpleados.Controllers
             return View(empleado);
         }
 
-        // POST: Empleados/Editar/5
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Editar(int id, Empleado empleado)
         {
@@ -71,7 +66,6 @@ namespace SistemaManejoEmpleados.Controllers
             return View(empleado);
         }
 
-        // GET: Empleados/Eliminar/5
         public async Task<IActionResult> Eliminar(int id)
         {
             var empleado = await _context.Empleados
@@ -82,7 +76,6 @@ namespace SistemaManejoEmpleados.Controllers
             return View(empleado);
         }
 
-        // POST: Empleados/Eliminar/5
         [HttpPost, ActionName("Eliminar"), ValidateAntiForgeryToken]
         public async Task<IActionResult> EliminarConfirmado(int id)
         {

@@ -10,7 +10,6 @@ namespace SistemaManejoEmpleados.Controllers
         private readonly ApplicationDbContext _context;
         public CargosController(ApplicationDbContext context) => _context = context;
 
-        // GET: Cargos/Lista
         public async Task<IActionResult> Lista()
         {
             var cargos = await _context.Cargos
@@ -19,14 +18,12 @@ namespace SistemaManejoEmpleados.Controllers
             return View(cargos);
         }
 
-        // GET: Cargos/Agregar
         public IActionResult Agregar()
         {
             ViewData["Departamentos"] = _context.Departamentos.ToList();
             return View();
         }
 
-        // POST: Cargos/Agregar
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Agregar(Cargo cargo)
         {
@@ -41,7 +38,7 @@ namespace SistemaManejoEmpleados.Controllers
             return RedirectToAction(nameof(Lista));
         }
 
-        // GET: Cargos/Editar/5
+        
         public async Task<IActionResult> Editar(int id)
         {
             var cargo = await _context.Cargos.FindAsync(id);
@@ -51,7 +48,7 @@ namespace SistemaManejoEmpleados.Controllers
             return View(cargo);
         }
 
-        // POST: Cargos/Editar
+        
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Editar(Cargo cargo)
         {
@@ -66,7 +63,7 @@ namespace SistemaManejoEmpleados.Controllers
             return RedirectToAction(nameof(Lista));
         }
 
-        // GET: Cargos/Eliminar/5
+     
         public async Task<IActionResult> Eliminar(int id)
         {
             var cargo = await _context.Cargos
@@ -76,7 +73,6 @@ namespace SistemaManejoEmpleados.Controllers
             return View(cargo);
         }
 
-        // POST: Cargos/Eliminar
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> EliminarConfirmado(int id)
         {

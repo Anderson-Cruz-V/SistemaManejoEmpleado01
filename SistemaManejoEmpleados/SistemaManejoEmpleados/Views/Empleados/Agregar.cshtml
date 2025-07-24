@@ -5,7 +5,6 @@
 @{
     ViewData["Title"] = "Registrar Empleado";
 
-    // Para el dropdown de 'Estado'
     var estadoList = new List<SelectListItem> {
         new SelectListItem { Text = "Vigente",    Value = "true"  },
         new SelectListItem { Text = "No vigente", Value = "false" }
@@ -15,8 +14,7 @@
 <h2 class="mb-4">Registrar Empleado</h2>
 
 <form asp-action="Agregar" method="post">
-    <!-- ...otros campos... -->
-    <!-- Departamento -->
+  
     <div class="form-group mb-3">
         <label asp-for="DepartamentoId" class="form-label"></label>
         <select asp-for="DepartamentoId"
@@ -26,7 +24,6 @@
         </select>
     </div>
 
-    <!-- Cargo -->
     <div class="form-group mb-3">
         <label asp-for="CargoId" class="form-label"></label>
         <select asp-for="CargoId"
@@ -36,13 +33,11 @@
         </select>
     </div>
 
-    <!-- Salario -->
     <div class="form-group mb-3">
         <label asp-for="Salario" class="form-label"></label>
         <input asp-for="Salario" class="form-control" />
     </div>
 
-    <!-- Estado -->
     <div class="form-group mb-4">
         <label asp-for="Estado" class="form-label"></label>
         <select asp-for="Estado"
