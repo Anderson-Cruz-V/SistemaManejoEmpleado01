@@ -1,0 +1,19 @@
+﻿@model SistemaManejoEmpleados.Models.Cargo
+
+@{
+    ViewData["Title"] = "Eliminar Cargo";
+}
+
+<h2 class="mb-4">Eliminar Cargo</h2>
+<p>¿Seguro que deseas eliminar este cargo?</p>
+
+<div class="mb-3">
+    <strong>Título:</strong> @Model.Titulo<br />
+    <strong>Departamento:</strong> @Model.Departamento?.Nombre
+</div>
+
+<form asp-action="EliminarConfirmado" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Lista" class="btn btn-secondary">Cancelar</a>
+</form>

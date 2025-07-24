@@ -1,0 +1,60 @@
+﻿@model SistemaManejoEmpleados.Models.Empleado
+@using SistemaManejoEmpleados.Models
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Editar Empleado";
+
+    // Para el dropdown de 'Estado', marcamos el seleccionado según Model.Estado
+    var estadoList = new List<SelectListItem> {
+        new SelectListItem { Text = "Vigente",    Value = "true",  Selected = Model.Estado },
+        new SelectListItem { Text = "No vigente", Value = "false", Selected = !Model.Estado }
+    };
+}
+
+<h2 class="mb-4">Editar Empleado</h2>
+
+<form asp-action="Editar" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <!-- ...otros campos... -->
+    <!-- Departamento -->
+    <div class="form-group mb-3">
+        <label asp-for="DepartamentoId" class="form-label"></label>
+        <select asp-for="DepartamentoId"
+                class="form-control"
+                asp-items="@(new SelectList((List<Departamento>)ViewData["Departamentos"], "Id", "Nombre", Model.DepartamentoId))">
+            <option value="">-- Selecciona un departamento --</option>
+        </select>
+    </div>
+
+    <!-- Cargo -->
+    <div class="form-group mb-3">
+        <label asp-for="CargoId" class="form-label"></label>
+        <select asp-for="CargoId"
+                class="form-control"
+                asp-items="@(new SelectList((List<Cargo>)ViewData["Cargos"], "Id", "Titulo", Model.CargoId))">
+            <option value="">-- Selecciona un cargo --</option>
+        </select>
+    </div>
+
+    <!-- Salario -->
+    <div class="form-group mb-3">
+        <label asp-for="Salario" class="form-label"></label>
+        <input asp-for="Salario" class="form-control" />
+    </div>
+
+    <!-- Estado -->
+    <div class="form-group mb-4">
+        <label asp-for="Estado" class="form-label"></label>
+        <select asp-for="Estado"
+                class="form-control"
+                asp-items="estadoList">
+            <option value="">-- Selecciona un estado --</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar cambios</button>
+    <a asp-action="Lista" class="btn btn-secondary">Cancelar</a>
+</form>
+

@@ -1,0 +1,18 @@
+﻿@model SistemaManejoEmpleados.Models.Departamento
+
+@{
+    ViewData["Title"] = "Eliminar Departamento";
+}
+
+<h2 class="mb-3">Eliminar Departamento</h2>
+<p>¿Seguro que deseas eliminar este departamento?</p>
+
+<div class="mb-3">
+    <strong>Nombre:</strong> @Model.Nombre
+</div>
+
+<form asp-action="Eliminar" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Lista" class="btn btn-secondary">Cancelar</a>
+</form>
