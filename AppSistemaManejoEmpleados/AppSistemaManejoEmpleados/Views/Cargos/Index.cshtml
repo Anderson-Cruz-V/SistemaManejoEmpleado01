@@ -1,0 +1,29 @@
+﻿@model IEnumerable<AppSistemaManejoEmpleados.Models.Cargo>
+@{
+    ViewData["Title"] = "Listado de Cargos";
+}
+<h1>@ViewData["Title"]</h1>
+<p>
+    <a asp-action="Crear" class="btn btn-primary">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Titulo</td>
+                <td>
+                    <a asp-action="Detalles" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

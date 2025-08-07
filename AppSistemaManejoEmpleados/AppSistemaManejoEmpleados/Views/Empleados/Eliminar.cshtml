@@ -1,0 +1,19 @@
+﻿@model AppSistemaManejoEmpleados.Models.Empleado
+@{
+    ViewData["Title"] = "Eliminar Empleado";
+}
+<h1>@ViewData["Title"]</h1>
+<h3>¿Confirma que desea eliminar este empleado?</h3>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Nombre</dt>
+        <dd class="col-sm-10">@Model.Nombre</dd>
+        <dt class="col-sm-2">Fecha de Inicio</dt>
+        <dd class="col-sm-10">@Model.FechaInicio:yyyy-MM-dd</dd>
+    </dl>
+</div>
+<form asp-action="Eliminar">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

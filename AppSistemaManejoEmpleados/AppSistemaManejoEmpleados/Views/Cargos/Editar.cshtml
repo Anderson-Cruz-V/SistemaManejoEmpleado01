@@ -1,0 +1,21 @@
+﻿@model AppSistemaManejoEmpleados.Models.Cargo
+@{
+    ViewData["Title"] = "Editar Cargo";
+}
+<h1>@ViewData["Title"]</h1>
+<form asp-action="Editar" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="Titulo"></label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

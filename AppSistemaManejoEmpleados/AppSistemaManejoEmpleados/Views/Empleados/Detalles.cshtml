@@ -1,0 +1,27 @@
+﻿@model AppSistemaManejoEmpleados.Models.Empleado
+@{
+    ViewData["Title"] = "Detalles del Empleado";
+}
+<h1>@ViewData["Title"]</h1>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Nombre</dt>
+        <dd class="col-sm-10">@Model.Nombre</dd>
+        <dt class="col-sm-2">Fecha de Inicio</dt>
+        <dd class="col-sm-10">@Model.FechaInicio:yyyy-MM-dd</dd>
+        <dt class="col-sm-2">Salario</dt>
+        <dd class="col-sm-10">@Model.Salario</dd>
+        <dt class="col-sm-2">Tiempo en Empresa</dt>
+        <dd class="col-sm-10">@Model.TiempoEnEmpresa</dd>
+        <dt class="col-sm-2">AFP</dt>
+        <dd class="col-sm-10">@Model.AFP</dd>
+        <dt class="col-sm-2">ARS</dt>
+        <dd class="col-sm-10">@Model.ARS</dd>
+        <dt class="col-sm-2">ISR</dt>
+        <dd class="col-sm-10">@Model.ISR</dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</p>

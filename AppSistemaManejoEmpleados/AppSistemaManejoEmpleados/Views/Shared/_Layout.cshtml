@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sistema de Empleados</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Mi Empresa</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" asp-controller="Empleados" asp-action="Index">Empleados</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Departamentos" asp-action="Index">Departamentos</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Cargos" asp-action="Index">Cargos</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Empleados" asp-action="ExportarCsv">
+                            Exportar CSV
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+
+
