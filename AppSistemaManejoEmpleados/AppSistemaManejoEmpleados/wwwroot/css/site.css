@@ -1,22 +1,68 @@
-html {
-  font-size: 14px;
+:root {
+    --brand: #0d6efd;
+    --brand-600: #0b5ed7;
+    --bg: #f5f7fb;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.bg-body {
+    background-color: var(--bg);
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.navbar .nav-link.active, .navbar .nav-link:hover {
+    color: #fff !important;
+    text-decoration: underline;
+    text-underline-offset: .25rem;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.card {
+    border: 0;
+    box-shadow: 0 6px 18px rgba(0,0,0,.06);
+    border-radius: 12px;
 }
 
-body {
-  margin-bottom: 60px;
+.card-header {
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    background: #fff;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+.table thead th {
+    background: #f0f3f9;
+    font-weight: 600;
+    border-bottom: 0;
+}
+
+.table tbody tr:hover {
+    background: #fafcff;
+}
+
+.badge-success {
+    background-color: #20c997;
+}
+
+.badge-secondary {
+    background-color: #6c757d;
+}
+
+.btn-brand {
+    --bs-btn-bg: var(--brand);
+    --bs-btn-border-color: var(--brand);
+    --bs-btn-hover-bg: var(--brand-600);
+    --bs-btn-hover-border-color: var(--brand-600);
+    color: #fff;
+}
+
+.form-switch .form-check-input {
+    width: 3rem;
+    height: 1.5rem;
+}
+
+.input-group .input-group-text {
+    background: #fff;
+}
+
+.empty-state {
+    padding: 3rem 1rem;
+    color: #6c757d;
+    text-align: center;
 }

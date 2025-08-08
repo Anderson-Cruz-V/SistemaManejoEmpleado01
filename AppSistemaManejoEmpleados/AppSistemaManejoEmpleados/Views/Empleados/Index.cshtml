@@ -1,57 +1,76 @@
 ﻿@model IEnumerable<AppSistemaManejoEmpleados.Models.Empleado>
 @{
-    ViewData["Title"] = "Listado de Empleados";
-    var depNombres = ViewBag.DepNombres as IDictionary<int, string>;
-    var cargoTitulos = ViewBag.CargoTitulos as IDictionary<int, string>;
-    var n = 0;
+    ViewData["Title"] = "Empleados";
+    var deps = ViewBag.DepNombres as IDictionary<int,string> ?? new Dictionary<int,string>();
+    var cargos = ViewBag.CargoTitulos as IDictionary<int,string> ?? new Dictionary<int,string>();
 }
-<h1>@ViewData["Title"]</h1>
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="bi bi-people-fill me-2"></i>Listado de Empleados</h5>
+        <div class="d-flex gap-2">
+            <a class="btn btn-brand" asp-action="Crear"><i class="bi bi-plus-lg me-1"></i>Crear Nuevo</a>
+            <a class="btn btn-outline-secondary" asp-action="ExportarCsv"><i class="bi bi-filetype-csv me-1"></i>Exportar CSV</a>
+        </div>
+    </div>
 
-<p>
-    <a asp-action="Crear" class="btn btn-primary">Crear Nuevo</a>
-    <a asp-action="ExportarCsv" class="btn btn-outline-secondary ms-2">Exportar CSV</a>
-</p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>N°</th>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Departamento</th>
-            <th>Cargo</th>
-            <th>Fecha de Inicio</th>
-            <th>Salario</th>
-            <th>Estado</th>
-            <th>Tiempo</th>
-            <th>AFP</th>
-            <th>ARS</th>
-            <th>ISR</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var e in Model)
-        {
-            <tr>
-                <td>@(++n)</td>
-                <td>@e.Id</td>
-                <td>@e.Nombre</td>
-                <td>@((depNombres != null && depNombres.ContainsKey(e.DepartamentoId)) ? depNombres[e.DepartamentoId] : "")</td>
-                <td>@((cargoTitulos != null && cargoTitulos.ContainsKey(e.CargoId)) ? cargoTitulos[e.CargoId] : "")</td>
-                <td>@e.FechaInicio.ToString("yyyy-MM-dd")</td>
-                <td>@e.Salario.ToString("N2")</td>
-                <td>@(e.Estado ? "Vigente" : "No vigente")</td>
-                <td>@e.TiempoEnEmpresa</td>
-                <td>@e.AFP.ToString("N2")</td>
-                <td>@e.ARS.ToString("N2")</td>
-                <td>@e.ISR.ToString("N2")</td>
-                <td>
-                    <a asp-action="Detalles" asp-route-id="@e.Id">Detalles</a> |
-                    <a asp-action="Editar" asp-route-id="@e.Id">Editar</a> |
-                    <a asp-action="Eliminar" asp-route-id="@e.Id">Eliminar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <i class="bi bi-inboxes display-6 d-block mb-2"></i>
+            No hay empleados registrados.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Departamento</th>
+                        <th>Cargo</th>
+                        <th>Fecha de Inicio</th>
+                        <th class="text-end">Salario</th>
+                        <th>Estado</th>
+                        <th>Tiempo</th>
+                        <th class="text-end">AFP</th>
+                        <th class="text-end">ARS</th>
+                        <th class="text-end">ISR</th>
+                        <th style="width:130px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var e in Model)
+                {
+                    <tr>
+                        <td>@e.Id</td>
+                        <td>@e.Nombre</td>
+                        <td>@(deps.TryGetValue(e.DepartamentoId, out var d) ? d : "-")</td>
+                        <td>@(cargos.TryGetValue(e.CargoId, out var c) ? c : "-")</td>
+                        <td>@e.FechaInicio.ToString("yyyy-MM-dd")</td>
+                        <td class="text-end">@e.Salario.ToString("N2")</td>
+                        <td>
+                            @if (e.Estado)
+                            { <span class="badge badge-success">Vigente</span> }
+                            else
+                            { <span class="badge badge-secondary">No vigente</span> }
+                        </td>
+                        <td>@e.TiempoEnEmpresa</td>
+                        <td class="text-end">@e.AFP.ToString("N2")</td>
+                        <td class="text-end">@e.ARS.ToString("N2")</td>
+                        <td class="text-end">@e.ISR.ToString("N2")</td>
+                        <td class="text-end">
+                            <div class="btn-group btn-group-sm">
+                                <a class="btn btn-outline-primary" asp-action="Detalles" asp-route-id="@e.Id"><i class="bi bi-eye"></i></a>
+                                <a class="btn btn-outline-warning" asp-action="Editar" asp-route-id="@e.Id"><i class="bi bi-pencil-square"></i></a>
+                                <a class="btn btn-outline-danger" asp-action="Eliminar" asp-route-id="@e.Id"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
