@@ -3,30 +3,55 @@
     ViewData["Title"] = "Crear Empleado";
 }
 <h1>@ViewData["Title"]</h1>
+
 <form asp-action="Crear" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
     <div class="form-group">
         <label asp-for="Nombre"></label>
         <input asp-for="Nombre" class="form-control" />
         <span asp-validation-for="Nombre" class="text-danger"></span>
     </div>
+
+    <div class="form-group">
+        <label asp-for="DepartamentoId"></label>
+        <select asp-for="DepartamentoId" class="form-control"
+                asp-items="@(ViewBag.DepartamentoId as SelectList)">
+            <option value="">-- Seleccione un departamento --</option>
+        </select>
+        <span asp-validation-for="DepartamentoId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CargoId"></label>
+        <select asp-for="CargoId" class="form-control"
+                asp-items="@(ViewBag.CargoId as SelectList)">
+            <option value="">-- Seleccione un cargo --</option>
+        </select>
+        <span asp-validation-for="CargoId" class="text-danger"></span>
+    </div>
+
     <div class="form-group">
         <label asp-for="FechaInicio"></label>
         <input asp-for="FechaInicio" type="date" class="form-control" />
         <span asp-validation-for="FechaInicio" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label asp-for="Salario"></label>
         <input asp-for="Salario" class="form-control" />
         <span asp-validation-for="Salario" class="text-danger"></span>
     </div>
-    <div class="form-check">
+
+    <div class="form-check mt-2">
         <input asp-for="Estado" class="form-check-input" />
         <label asp-for="Estado" class="form-check-label"></label>
     </div>
-    <br />
-    <button type="submit" class="btn btn-success">Guardar</button>
-    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+
+    <button type="submit" class="btn btn-success mt-3">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Volver</a>
 </form>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
