@@ -2,16 +2,24 @@
 @{
     ViewData["Title"] = "Eliminar Cargo";
 }
-<h1>@ViewData["Title"]</h1>
-<h3>¿Confirma que desea eliminar este cargo?</h3>
-<div>
-    <dl class="row">
-        <dt class="col-sm-2">Título</dt>
-        <dd class="col-sm-10">@Model.Titulo</dd>
-    </dl>
+<div class="card border-danger">
+    <div class="card-header text-danger">
+        <h5 class="mb-0"><i class="bi bi-trash me-2"></i>Confirmar Eliminación</h5>
+    </div>
+    <div class="card-body">
+        <p>¿Seguro que deseas eliminar este cargo?</p>
+        <dl class="row">
+            <dt class="col-sm-2">ID</dt>
+            <dd class="col-sm-10">@Model.Id</dd>
+            <dt class="col-sm-2">Título</dt>
+            <dd class="col-sm-10">@Model.Titulo</dd>
+        </dl>
+        <form asp-action="Eliminar">
+            <input type="hidden" asp-for="Id" />
+            <div class="d-flex gap-2">
+                <button class="btn btn-danger"><i class="bi bi-trash me-1"></i>Eliminar</button>
+                <a class="btn btn-outline-secondary" asp-action="Index"><i class="bi bi-arrow-left me-1"></i>Cancelar</a>
+            </div>
+        </form>
+    </div>
 </div>
-<form asp-action="Eliminar">
-    <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">Eliminar</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-</form>
