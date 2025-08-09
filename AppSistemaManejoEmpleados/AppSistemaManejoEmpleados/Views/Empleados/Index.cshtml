@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<AppSistemaManejoEmpleados.Models.Empleado>
 @{
     ViewData["Title"] = "Empleados";
-    var deps = ViewBag.DepNombres as IDictionary<int,string> ?? new Dictionary<int,string>();
-    var cargos = ViewBag.CargoTitulos as IDictionary<int,string> ?? new Dictionary<int,string>();
+    var deps = ViewBag.DepNombres as IDictionary<int, string> ?? new Dictionary<int, string>();
+    var cargos = ViewBag.CargoTitulos as IDictionary<int, string> ?? new Dictionary<int, string>();
 }
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
@@ -41,34 +41,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach (var e in Model)
-                {
-                    <tr>
-                        <td>@e.Id</td>
-                        <td>@e.Nombre</td>
-                        <td>@(deps.TryGetValue(e.DepartamentoId, out var d) ? d : "-")</td>
-                        <td>@(cargos.TryGetValue(e.CargoId, out var c) ? c : "-")</td>
-                        <td>@e.FechaInicio.ToString("yyyy-MM-dd")</td>
-                        <td class="text-end">@e.Salario.ToString("N2")</td>
-                        <td>
-                            @if (e.Estado)
-                            { <span class="badge badge-success">Vigente</span> }
-                            else
-                            { <span class="badge badge-secondary">No vigente</span> }
-                        </td>
-                        <td>@e.TiempoEnEmpresa</td>
-                        <td class="text-end">@e.AFP.ToString("N2")</td>
-                        <td class="text-end">@e.ARS.ToString("N2")</td>
-                        <td class="text-end">@e.ISR.ToString("N2")</td>
-                        <td class="text-end">
-                            <div class="btn-group btn-group-sm">
-                                <a class="btn btn-outline-primary" asp-action="Detalles" asp-route-id="@e.Id"><i class="bi bi-eye"></i></a>
-                                <a class="btn btn-outline-warning" asp-action="Editar" asp-route-id="@e.Id"><i class="bi bi-pencil-square"></i></a>
-                                <a class="btn btn-outline-danger" asp-action="Eliminar" asp-route-id="@e.Id"><i class="bi bi-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                }
+                    @foreach (var e in Model)
+                    {
+                        <tr>
+                            <td>@e.Id</td>
+                            <td>@e.Nombre</td>
+                            <td>@(deps.TryGetValue(e.DepartamentoId, out var d) ? d : "-")</td>
+                            <td>@(cargos.TryGetValue(e.CargoId, out var c) ? c : "-")</td>
+                            <td>@e.FechaInicio.ToString("yyyy-MM-dd")</td>
+                            <td class="text-end">@e.Salario.ToString("N2")</td>
+                            <td>
+                                @if (e.Estado)
+                                {
+                                    <span class="badge-soft-success">Vigente</span>
+                                }
+                                else
+                                {
+                                    <span class="badge-soft-danger">No vigente</span>
+                                }
+                            </td>
+                            <td>@e.TiempoEnEmpresa</td>
+                            <td class="text-end">@e.AFP.ToString("N2")</td>
+                            <td class="text-end">@e.ARS.ToString("N2")</td>
+                            <td class="text-end">@e.ISR.ToString("N2")</td>
+                            <td class="text-end">
+                                <div class="btn-group btn-group-sm">
+                                    <a class="btn btn-outline-primary" asp-action="Detalles" asp-route-id="@e.Id"><i class="bi bi-eye"></i></a>
+                                    <a class="btn btn-outline-warning" asp-action="Editar" asp-route-id="@e.Id"><i class="bi bi-pencil-square"></i></a>
+                                    <a class="btn btn-outline-danger" asp-action="Eliminar" asp-route-id="@e.Id"><i class="bi bi-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

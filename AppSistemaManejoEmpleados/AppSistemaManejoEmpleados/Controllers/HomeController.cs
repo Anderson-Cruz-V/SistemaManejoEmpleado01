@@ -1,32 +1,20 @@
-using AppSistemaManejoEmpleados.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using AppSistemaManejoEmpleados.Data;
+using System.Linq;
 
 namespace AppSistemaManejoEmpleados.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        private readonly AppDbContext _context;
+        public HomeController(AppDbContext context) { _context = context; }
 
         public IActionResult Index()
         {
+            ViewBag.CantEmpl = _context.Empleados.Count();
+            ViewBag.CantDep = _context.Departamentos.Count();
+            ViewBag.CantCarg = _context.Cargos.Count();
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
